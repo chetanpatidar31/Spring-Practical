@@ -4,7 +4,7 @@ import com.rays.dto.UserDTO;
 
 public interface UserDAOInt {
 
-	public long add(UserDTO userDTO);
-//	public void update(UserDTO userDTO);
+	public long add(UserDTO dto);
+//	public void update(UserDTO dto);
 //	public void delete(long id);
 }
