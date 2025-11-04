@@ -1,5 +1,7 @@
 package com.rays.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -15,7 +17,13 @@ public class UserServiceImpl implements UserServiceInt {
 	private UserDAOInt dao;
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	public long add(UserDTO dto) {
+	public long add(UserDTO dto) throws Exception {
+		UserDTO existDto = findByLogin(dto.getLogin());
+		
+		if (existDto != null) {
+			throw new Exception("Login id already exist");
+		}
+		
 		long pk = dao.add(dto);
 		return pk;
 	}
@@ -36,6 +44,10 @@ public class UserServiceImpl implements UserServiceInt {
 
 	public UserDTO authenticate(String login, String password) {
 		return dao.authenticate(login, password);
+	}
+
+	public List<UserDTO> search(UserDTO dto) {
+		return dao.search(dto);
 	}
 
 }

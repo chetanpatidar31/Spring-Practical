@@ -1,5 +1,8 @@
 package com.rays.test;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -14,19 +17,20 @@ public class TestUserService {
 	@Autowired
 	public UserServiceInt service = null;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
 		TestUserService test = (TestUserService) context.getBean("testUserService");
 
 //		test.testAdd();
-		test.testUpdate();
+//		test.testUpdate();
 //		test.testDelete();
 //		test.testFindByLogin();
 //		test.testAuthenticate();
+		test.testSearch();
 	}
 
-	public void testAdd() {
+	public void testAdd() throws Exception {
 		UserDTO dto = new UserDTO();
 		dto.setId(2);
 		dto.setFirstName("pqr");
@@ -77,5 +81,23 @@ public class TestUserService {
 		} else {
 			System.out.println("Invalid login id or Password");
 		}
+	}
+
+	public void testSearch() {
+		UserDTO dto = new UserDTO();
+		dto.setFirstName("pqr");
+		List<UserDTO> list = service.search(dto);
+		Iterator it = list.iterator();
+
+		while (it.hasNext()) {
+			dto = (UserDTO) it.next();
+
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		}
+
 	}
 }
