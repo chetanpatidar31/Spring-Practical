@@ -20,14 +20,14 @@ public class UserServiceImpl implements UserServiceInt {
 		return pk;
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(UserDTO dto) {
-		// TODO Auto-generated method stub
-
+		dao.update(dto);
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void delete(long id) {
-		// TODO Auto-generated method stub
-
+		dao.delete(id);
 	}
 
 }
