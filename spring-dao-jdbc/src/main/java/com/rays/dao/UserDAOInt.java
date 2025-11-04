@@ -9,4 +9,8 @@ public interface UserDAOInt {
 	public void update(UserDTO dto);
 
 	public void delete(long id);
+
+	public UserDTO findByLogin(String login);
+
+	public UserDTO authenticate(String login, String password);
 }

@@ -20,8 +20,10 @@ public class TestUserService {
 		TestUserService test = (TestUserService) context.getBean("testUserService");
 
 //		test.testAdd();
-//		test.testUpdate();
-		test.testDelete();
+		test.testUpdate();
+//		test.testDelete();
+//		test.testFindByLogin();
+//		test.testAuthenticate();
 	}
 
 	public void testAdd() {
@@ -37,7 +39,7 @@ public class TestUserService {
 
 	public void testUpdate() {
 		UserDTO dto = new UserDTO();
-		dto.setId(2);
+		dto.setId(1);
 		dto.setFirstName("def");
 		dto.setLastName("jkl");
 		dto.setLogin("admin3");
@@ -49,5 +51,31 @@ public class TestUserService {
 	public void testDelete() {
 		service.delete(2);
 		System.out.println("Data Deleted... ");
+	}
+
+	public void testFindByLogin() {
+		UserDTO dto = service.findByLogin("admin1");
+		if (dto != null) {
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		} else {
+			System.out.println("No Record exist");
+		}
+	}
+
+	public void testAuthenticate() {
+		UserDTO dto = service.authenticate("admin", "pass1234");
+		if (dto != null) {
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		} else {
+			System.out.println("Invalid login id or Password");
+		}
 	}
 }

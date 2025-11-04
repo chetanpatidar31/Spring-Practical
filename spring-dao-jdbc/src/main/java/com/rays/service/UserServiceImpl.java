@@ -30,4 +30,12 @@ public class UserServiceImpl implements UserServiceInt {
 		dao.delete(id);
 	}
 
+	public UserDTO findByLogin(String login) {
+		return dao.findByLogin(login);
+	}
+
+	public UserDTO authenticate(String login, String password) {
+		return dao.authenticate(login, password);
+	}
+
 }

@@ -3,7 +3,9 @@ package com.rays.dao;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.rays.dto.UserDTO;
@@ -41,6 +43,31 @@ public class UserDAOJDBCImpl implements UserDAOInt {
 
 		jdbcTemplate.update(sql, id);
 
+	}
+
+	public UserDTO findByLogin(String login) {
+		try {
+			String sql = "select * from st_user where login = ?";
+
+			Object[] params = { login };
+
+			UserDTO user = jdbcTemplate.queryForObject(sql, params, new UserMapper());
+			return user;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+
+	public UserDTO authenticate(String login, String password) {
+
+		try {
+			String sql = "select * from st_user where login=? and password=?";
+
+			Object[] params = { login, password };
+			return jdbcTemplate.queryForObject(sql, params, new UserMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 
 }
