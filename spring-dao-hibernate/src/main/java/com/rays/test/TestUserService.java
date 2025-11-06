@@ -44,7 +44,7 @@ public class TestUserService {
 		dto.setLastName("Sahu");
 		dto.setLogin("aastik@gmail.com");
 		dto.setPassword("pass123");
-		dto.setId(1);
+		dto.setId(3);
 
 		service.update(dto);
 		System.out.println("Data Updated Successfully");
@@ -54,5 +54,7 @@ public class TestUserService {
 	private void testDelete() {
 		UserDTO dto = new UserDTO();
 		dto.setId(2);
+		service.delete(dto);
+		System.out.println("Data Deleted Successfully");
 	}
 }
