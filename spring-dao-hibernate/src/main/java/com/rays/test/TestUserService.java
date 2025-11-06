@@ -20,8 +20,11 @@ public class TestUserService {
 		TestUserService test = context.getBean(TestUserService.class);
 
 //		test.testAdd();
-		test.testUpdate();
+//		test.testUpdate();
 //		test.testDelete();
+		test.testFindByPk();
+//		test.testFindByLogin();
+//		test.TestAuthenticate();
 	}
 
 	private void testAdd() {
@@ -56,5 +59,28 @@ public class TestUserService {
 		dto.setId(2);
 		service.delete(dto);
 		System.out.println("Data Deleted Successfully");
+	}
+
+	private void testFindByPk() {
+		UserDTO dto = service.findByPk(3);
+
+		if (dto != null) {
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		}
+
+	}
+
+	private void testFindByLogin() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void TestAuthenticate() {
+		// TODO Auto-generated method stub
+
 	}
 }

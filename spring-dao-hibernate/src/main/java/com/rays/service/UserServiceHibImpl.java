@@ -29,9 +29,9 @@ public class UserServiceHibImpl implements UserServiceInt {
 		userDAO.delete(dto);
 	}
 
-	public UserDTO findByPk(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional(readOnly = true)
+	public UserDTO findByPk(long id) {
+		return userDAO.findByPk(id);
 	}
 
 	public UserDTO findByLogin(String login) {

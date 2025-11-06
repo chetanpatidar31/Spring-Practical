@@ -26,21 +26,23 @@ public class UserDAOHibImpl implements UserDAOInt {
 
 	public void delete(UserDTO dto) {
 		Session session = sessionFactory.getCurrentSession();
-		session.delete(dto);	
+		session.delete(dto);
 	}
 
-	public UserDTO findByPk(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserDTO findByPk(long id) {
+		Session session = sessionFactory.getCurrentSession();
+		UserDTO dto = session.get(UserDTO.class, id);
+		return dto;
 	}
 
 	public UserDTO findByLogin(String login) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		UserDTO dto = session.get(UserDTO.class, login);
+		return dto;
 	}
 
 	public UserDTO authenticate(String login, String password) {
-		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
 		return null;
 	}
 
