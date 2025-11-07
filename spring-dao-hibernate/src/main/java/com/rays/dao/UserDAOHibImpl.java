@@ -64,4 +64,16 @@ public class UserDAOHibImpl implements UserDAOInt {
 		return dto;
 	}
 
+	public List search(UserDTO dto, int pageNo, int pageSize) {
+
+		List list = null;
+
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(UserDTO.class);
+		
+		list = criteria.list();
+
+		return list;
+	}
+
 }

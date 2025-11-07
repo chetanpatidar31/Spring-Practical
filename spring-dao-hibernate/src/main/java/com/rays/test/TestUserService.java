@@ -1,5 +1,8 @@
 package com.rays.test;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,7 +27,8 @@ public class TestUserService {
 //		test.testDelete();
 //		test.testFindByPk();
 //		test.testFindByLogin();
-		test.TestAuthenticate();
+//		test.testAuthenticate();
+		test.testSearch();
 	}
 
 	private void testAdd() {
@@ -90,7 +94,7 @@ public class TestUserService {
 		}
 	}
 
-	private void TestAuthenticate() {
+	private void testAuthenticate() {
 		UserDTO dto = service.authenticate("amit@gmail.com", "Pass@123");
 
 		if (dto != null) {
@@ -102,6 +106,21 @@ public class TestUserService {
 		} else {
 			System.out.println("No Record found");
 		}
+	}
 
+	private void testSearch() {
+		UserDTO dto = null;
+		List list = service.search(dto, 1, 10);
+		Iterator it = list.iterator();
+
+		while (it.hasNext()) {
+			dto = (UserDTO) it.next();
+
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		}
 	}
 }

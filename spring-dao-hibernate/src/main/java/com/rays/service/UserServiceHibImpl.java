@@ -1,5 +1,7 @@
 package com.rays.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -42,6 +44,11 @@ public class UserServiceHibImpl implements UserServiceInt {
 	@Transactional(readOnly = true)
 	public UserDTO authenticate(String login, String password) {
 		return userDAO.authenticate(login, password);
+	}
+
+	@Transactional(readOnly = true)
+	public List search(UserDTO dto, int pageNo, int pageSize) {
+		return userDAO.search(dto, pageNo, pageSize);
 	}
 
 }
