@@ -22,9 +22,9 @@ public class TestUserService {
 //		test.testAdd();
 //		test.testUpdate();
 //		test.testDelete();
-		test.testFindByPk();
+//		test.testFindByPk();
 //		test.testFindByLogin();
-//		test.TestAuthenticate();
+		test.TestAuthenticate();
 	}
 
 	private void testAdd() {
@@ -43,10 +43,10 @@ public class TestUserService {
 	private void testUpdate() {
 		UserDTO dto = new UserDTO();
 
-		dto.setFirstName("Aastik");
-		dto.setLastName("Sahu");
-		dto.setLogin("aastik@gmail.com");
-		dto.setPassword("pass123");
+		dto.setFirstName("Amit");
+		dto.setLastName("Kirar");
+		dto.setLogin("amit@gmail.com");
+		dto.setPassword("Pass@123");
 		dto.setId(3);
 
 		service.update(dto);
@@ -70,17 +70,38 @@ public class TestUserService {
 			System.out.print("\t" + dto.getLastName());
 			System.out.print("\t" + dto.getLogin());
 			System.out.println("\t" + dto.getPassword());
+		} else {
+			System.out.println("No Record found");
 		}
 
 	}
 
 	private void testFindByLogin() {
-		// TODO Auto-generated method stub
+		UserDTO dto = service.findByLogin("amit@gmail.com");
 
+		if (dto != null) {
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		} else {
+			System.out.println("No Record found");
+		}
 	}
 
 	private void TestAuthenticate() {
-		// TODO Auto-generated method stub
+		UserDTO dto = service.authenticate("amit@gmail.com", "Pass@123");
+
+		if (dto != null) {
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		} else {
+			System.out.println("No Record found");
+		}
 
 	}
 }

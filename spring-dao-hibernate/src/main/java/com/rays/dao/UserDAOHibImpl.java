@@ -1,7 +1,11 @@
 package com.rays.dao;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -36,14 +40,28 @@ public class UserDAOHibImpl implements UserDAOInt {
 	}
 
 	public UserDTO findByLogin(String login) {
+		UserDTO dto = null;
 		Session session = sessionFactory.getCurrentSession();
-		UserDTO dto = session.get(UserDTO.class, login);
+		Criteria criteria = session.createCriteria(UserDTO.class);
+		criteria.add(Restrictions.eq("login", login));
+		List list = criteria.list();
+		if (list.size() == 1) {
+			dto = (UserDTO) list.get(0);
+		}
 		return dto;
 	}
 
 	public UserDTO authenticate(String login, String password) {
+		UserDTO dto = null;
 		Session session = sessionFactory.getCurrentSession();
-		return null;
+		Criteria criteria = session.createCriteria(UserDTO.class);
+		criteria.add(Restrictions.eq("login", login));
+		criteria.add(Restrictions.eq("password", password));
+		List list = criteria.list();
+		if (list.size() == 1) {
+			dto = (UserDTO) list.get(0);
+		}
+		return dto;
 	}
 
 }
