@@ -70,7 +70,20 @@ public class UserDAOHibImpl implements UserDAOInt {
 
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(UserDTO.class);
-		
+
+		if (dto != null) {
+			if (dto.getFirstName() != null && dto.getFirstName().length() > 0) {
+				criteria.add(Restrictions.ilike("firstName", dto.getFirstName()));
+			}
+			if (dto.getLastName() != null && dto.getLastName().length() > 0) {
+				criteria.add(Restrictions.ilike("lastName", dto.getLastName()));
+			}
+			if (dto.getLogin() != null && dto.getLogin().length() > 0) {
+				criteria.add(Restrictions.ilike("login", dto.getLogin()));
+			}
+
+		}
+
 		list = criteria.list();
 
 		return list;

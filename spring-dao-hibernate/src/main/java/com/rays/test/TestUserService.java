@@ -109,18 +109,27 @@ public class TestUserService {
 	}
 
 	private void testSearch() {
-		UserDTO dto = null;
-		List list = service.search(dto, 1, 10);
-		Iterator it = list.iterator();
+		UserDTO dto = new UserDTO();
+		dto.setFirstName("amit");
+		List<UserDTO> list = service.search(dto, 1, 5);
 
-		while (it.hasNext()) {
-			dto = (UserDTO) it.next();
-
-			System.out.print(dto.getId());
-			System.out.print("\t" + dto.getFirstName());
-			System.out.print("\t" + dto.getLastName());
-			System.out.print("\t" + dto.getLogin());
-			System.out.println("\t" + dto.getPassword());
+		for (UserDTO udto : list) {
+			
+			System.out.print(udto.getId());
+			System.out.print("\t" + udto.getFirstName());
+			System.out.print("\t" + udto.getLastName());
+			System.out.print("\t" + udto.getLogin());
+			System.out.println("\t" + udto.getPassword());
 		}
+
+		/*
+		 * Iterator it = list.iterator();
+		 * 
+		 * while (it.hasNext()) { dto = (UserDTO) it.next();
+		 * 
+		 * System.out.print(dto.getId()); System.out.print("\t" + dto.getFirstName());
+		 * System.out.print("\t" + dto.getLastName()); System.out.print("\t" +
+		 * dto.getLogin()); System.out.println("\t" + dto.getPassword()); }
+		 */
 	}
 }
