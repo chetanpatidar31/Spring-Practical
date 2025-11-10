@@ -3,6 +3,7 @@ package com.rays.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,23 +36,57 @@ public class UserDAOImpl implements UserDAOInt {
 	}
 
 	public UserDTO findByLogin(String login) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(UserDTO.class);
-		return (UserDTO) criteria.add(Restrictions.eq("login", login));
+		UserDTO dto = null;
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(UserDTO.class);
+		criteria.add(Restrictions.eq("login", login));
+		List list = criteria.list();
+		if (list.size() == 1) {
+			dto = (UserDTO) list.get(0);
+		}
+		return dto;
 	}
 
 	public UserDTO authenticate(String login, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		UserDTO dto = null;
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(UserDTO.class);
+		criteria.add(Restrictions.eq("login", login));
+		criteria.add(Restrictions.eq("password", password));
+		List list = criteria.list();
+		if (list.size() == 1) {
+			dto = (UserDTO) list.get(0);
+		}
+		return dto;
+	}
+
+	public List search(UserDTO dto, int pageNo, int pageSize) {
+
+		List list = null;
+
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(UserDTO.class);
+
+		if (dto != null) {
+			if (dto.getFirstName() != null && dto.getFirstName().length() > 0) {
+				criteria.add(Restrictions.ilike("firstName", dto.getFirstName()));
+			}
+			if (dto.getLastName() != null && dto.getLastName().length() > 0) {
+				criteria.add(Restrictions.ilike("lastName", dto.getLastName()));
+			}
+			if (dto.getLogin() != null && dto.getLogin().length() > 0) {
+				criteria.add(Restrictions.ilike("login", dto.getLogin()));
+			}
+
+		}
+
+		list = criteria.list();
+
+		return list;
 	}
 
 	public List search() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List search(UserDTO dto, int pageno, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+		return search(null, 0, 0);
 	}
 
 }

@@ -37,18 +37,16 @@ public class UserServiceImpl implements UserServiceInt {
 	}
 
 	public UserDTO authenticate(String login, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.authenticate(login, password);
 	}
 
 	public List search() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return dao.search();
 	}
 
 	public List search(UserDTO dto, int pageno, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.search(dto, pageno, pageSize);
 	}
 
 }

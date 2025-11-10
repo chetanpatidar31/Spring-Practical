@@ -1,5 +1,7 @@
 package com.rays.test;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -20,7 +22,13 @@ public class TestUserService {
 
 		TestUserService test = context.getBean(TestUserService.class);
 
-		test.testAdd();
+//		test.testAdd();
+//		test.testUpdate();
+//		test.testDelete();
+//		test.testFindByPk();
+//		test.testFindByLogin();
+//		test.testAuthenticate();
+		test.testSearch();
 
 	}
 
@@ -34,5 +42,82 @@ public class TestUserService {
 
 		long pk = service.add(dto);
 		System.out.println("Data added Successful : " + pk);
+	}
+
+	private void testUpdate() {
+		UserDTO dto = new UserDTO();
+
+		dto.setFirstName("Nirmal");
+		dto.setLastName("Sen");
+		dto.setLogin("nirmal@gmail.com");
+		dto.setPassword("Nirmal@123");
+
+		service.update(dto);
+		System.out.println("Data Updated Successfull");
+	}
+
+	private void testDelete() {
+		UserDTO dto = new UserDTO();
+		dto.setId(2);
+		service.delete(dto);
+		System.out.println("Data Deleted Successfully");
+	}
+
+	private void testFindByPk() {
+		UserDTO dto = service.findByPk(3);
+
+		if (dto != null) {
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		} else {
+			System.out.println("No Record found");
+		}
+
+	}
+
+	private void testFindByLogin() {
+		UserDTO dto = service.findByLogin("amit@gmail.com");
+
+		if (dto != null) {
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		} else {
+			System.out.println("No Record found");
+		}
+	}
+
+	private void testAuthenticate() {
+		UserDTO dto = service.authenticate("amit@gmail.com", "Pass@123");
+
+		if (dto != null) {
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+		} else {
+			System.out.println("No Record found");
+		}
+	}
+
+	private void testSearch() {
+		UserDTO dto = new UserDTO();
+//		dto.setFirstName("amit");
+		List<UserDTO> list = service.search(dto, 1, 5);
+
+		for (UserDTO udto : list) {
+
+			System.out.print(udto.getId());
+			System.out.print("\t" + udto.getFirstName());
+			System.out.print("\t" + udto.getLastName());
+			System.out.print("\t" + udto.getLogin());
+			System.out.println("\t" + udto.getPassword());
+		}
 	}
 }
