@@ -11,7 +11,8 @@
 	<sf:form method="post" modelAttribute="form">
 		<div align="center">
 			<h1 style="color: navy">Login</h1>
-			<h2 style="color: green">$(successMsg)</h2>
+			<h2 style="color: green">${successMsg}</h2>
+			<h2 style="color: red">${errorMsg}</h2>
 			<table>
 				<tr>
 					<th align="left">Login ID :</th>
