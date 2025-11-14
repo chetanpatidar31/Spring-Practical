@@ -7,9 +7,11 @@
 <title>Welcome</title>
 </head>
 <body>
+<%@include file="Header.jsp" %>
 	<div align="center">
 		<h1>${message}</h1>
 		<h2>Simple</h2>
 	</div>
+	<%@include file="Footer.jsp" %>
 </body>
 </html>
