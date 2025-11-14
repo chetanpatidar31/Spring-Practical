@@ -1,5 +1,7 @@
 package com.rays.ctl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,8 +62,56 @@ public class UserCtl {
 		return "UserView";
 	}
 
-	@GetMapping("Search")
-	public String display(@ModelAttribute("form") UserForm form) {
+	@GetMapping("search")
+	public String display(@ModelAttribute("form") UserForm form, Model model) {
+
+		int pageNo = 1;
+		int pageSize = 5;
+
+		form.setPageNo(pageNo);
+
+		List list = service.search(null, pageNo, pageSize);
+
+		model.addAttribute("list", list);
+
+		return "UserListView";
+	}
+
+	@PostMapping("search")
+	public String display(@ModelAttribute("form") UserForm form, @RequestParam(required = false) String operation,
+			Model model) {
+
+		UserDTO dto = null;
+
+		int pageNo = 1;
+		int pageSize = 5;
+		System.out.println("op----> " + operation);
+		if (operation != null && operation.equals("next")) {
+			pageNo = form.getPageNo();
+			pageNo++;
+		}
+
+		if (operation != null && operation.equals("previous")) {
+			pageNo = form.getPageNo();
+			pageNo--;
+		}
+
+		if (operation != null && operation.equals("delete")) {
+			if (form.getIds() != null && form.getIds().length > 0) {
+				for (long id : form.getIds()) {
+					service.delete(id);
+					model.addAttribute("successMsg", "Record Deleted Successfully");
+				}
+			} else {
+				model.addAttribute("errorMsg", "Select atleast one Record");
+			}
+		}
+
+		form.setPageNo(pageNo);
+
+		List list = service.search(dto, pageNo, pageSize);
+
+		model.addAttribute("list", list);
 
 		return "UserListView";
 	}
