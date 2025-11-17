@@ -39,24 +39,28 @@ public class LoginCtl {
 	}
 
 	@PostMapping
-	public String submit(@ModelAttribute("form") @Valid LoginForm form,BindingResult bindingResult, @RequestParam(required = false) String operation,
-			HttpSession session, Model model) {
+	public String submit(@ModelAttribute("form") @Valid LoginForm form, BindingResult bindingResult,
+			@RequestParam(required = false) String operation, HttpSession session, Model model) {
 
 		if (operation.equals("signUp")) {
 			return "redirect:Register";
 		}
-		
+
 		if (bindingResult.hasErrors()) {
 			return "Login";
 		}
 
-		UserDTO dto = service.authenticate(form.getLogin(), form.getPassword());
+		UserDTO dto = null;
+		try {
+			dto = service.authenticate(form.getLogin(), form.getPassword());
+		} catch (Exception e) {
+			model.addAttribute("errorMsg", "Invalid Login Id or Password");
+			e.printStackTrace();
+		}
 
 		if (dto != null) {
 			session.setAttribute("user", dto);
 			return "redirect:Welcome";
-		} else {
-			model.addAttribute("errorMsg", "Invalid Login Id or Password");
 		}
 
 		return "Login";

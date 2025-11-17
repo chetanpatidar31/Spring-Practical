@@ -1,9 +1,13 @@
 package com.rays.form;
 
+import java.util.Date;
+
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class UserRegistrationForm {
 
@@ -14,6 +18,10 @@ public class UserRegistrationForm {
 
 	@NotEmpty(message = "Last name is required")
 	private String lastName;
+
+	@NotNull
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
+	private Date dob;
 
 	@NotEmpty(message = "Login id is required")
 	@Email(message = "Invalid email Id")
@@ -48,6 +56,14 @@ public class UserRegistrationForm {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
 	}
 
 	public String getLogin() {

@@ -49,21 +49,28 @@ public class UserCtl {
 			return "UserView";
 		}
 
-		UserDTO dto = new UserDTO();
+		try {
 
-		dto.setId(form.getId());
-		dto.setFirstName(form.getFirstName());
-		dto.setLastName(form.getLastName());
-		dto.setLogin(form.getLogin());
-		dto.setPassword(form.getPassword());
-		dto.setAddress(form.getAddress());
+			UserDTO dto = new UserDTO();
 
-		if (form.getId() > 0) {
-			service.update(dto);
-			model.addAttribute("successMsg", "Record Updated Successfully");
-		} else {
-			service.add(dto);
-			model.addAttribute("successMsg", "Record added successfully");
+			dto.setId(form.getId());
+			dto.setFirstName(form.getFirstName());
+			dto.setLastName(form.getLastName());
+			dto.setLogin(form.getLogin());
+			dto.setPassword(form.getPassword());
+			dto.setAddress(form.getAddress());
+
+			if (form.getId() > 0) {
+				service.update(dto);
+				model.addAttribute("successMsg", "Record Updated Successfully");
+			} else {
+				service.add(dto);
+				model.addAttribute("successMsg", "Record added successfully");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMsg", "Login id Already Exist");
 		}
 
 		return "UserView";

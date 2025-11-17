@@ -13,6 +13,7 @@
 		<div align="center">
 			<h1 style="color: navy">User Registration</h1>
 			<h2 style="color: green">${successMsg}</h2>
+			<h2 style="color: red">${errorMsg}</h2>
 			<table>
 				<tr>
 					<th align="left">First Name :</th>
@@ -23,6 +24,11 @@
 					<th align="left">Last Name :</th>
 					<td><sf:input path="lastName" placeholder="Enter last name" /></td>
 					<td style="color: red;"><sf:errors path="lastName" /></td>
+				</tr>
+				<tr>
+				<th align="left"> DOB :</th>
+				<td><sf:input path="dob" type="date" placeholder="Select DOB" /></td>
+				<td style="color: red;"><sf:errors path="dob" /></td>
 				</tr>
 				<tr>
 					<th align="left">Login ID :</th>

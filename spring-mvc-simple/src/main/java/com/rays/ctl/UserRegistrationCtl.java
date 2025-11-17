@@ -36,16 +36,19 @@ public class UserRegistrationCtl {
 			return "UserRegistration";
 		}
 
-		UserDTO dto = new UserDTO();
-		dto.setFirstName(form.getFirstName());
-		dto.setLastName(form.getLastName());
-		dto.setLogin(form.getLogin());
-		dto.setPassword(form.getPassword());
-		dto.setAddress(form.getAddress());
-
-		service.add(dto);
-		model.addAttribute("successMsg", "user register successfully");
-
+		try {
+			UserDTO dto = new UserDTO();
+			dto.setFirstName(form.getFirstName());
+			dto.setLastName(form.getLastName());
+			dto.setLogin(form.getLogin());
+			dto.setPassword(form.getPassword());
+			dto.setAddress(form.getAddress());
+			service.add(dto);
+			model.addAttribute("successMsg", "user register successfully");
+		} catch (Exception e) {
+			model.addAttribute("errorMsg", "Login id Already exist");
+			e.printStackTrace();
+		}
 		return "UserRegistration";
 	}
 }

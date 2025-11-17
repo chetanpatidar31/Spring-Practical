@@ -1,5 +1,7 @@
 package com.rays.dto;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +25,9 @@ public class UserDTO {
 
 	@Column(name = "LAST_NAME", length = 50)
 	private String lastName = null;
+
+	@Column(name = "DOB")
+	private Date dob = null;
 
 	@Column(name = "LOGIN", length = 50)
 	private String login = null;
@@ -55,6 +60,14 @@ public class UserDTO {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
 	}
 
 	public String getLogin() {
