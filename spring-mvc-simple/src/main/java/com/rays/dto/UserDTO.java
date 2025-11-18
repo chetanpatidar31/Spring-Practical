@@ -1,5 +1,6 @@
 package com.rays.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -27,7 +28,7 @@ public class UserDTO {
 	private String lastName = null;
 
 	@Column(name = "DOB")
-	private Date dob = null;
+	private LocalDate dob = null;
 
 	@Column(name = "LOGIN", length = 50)
 	private String login = null;
@@ -62,11 +63,11 @@ public class UserDTO {
 		this.lastName = lastName;
 	}
 
-	public Date getDob() {
+	public LocalDate getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 

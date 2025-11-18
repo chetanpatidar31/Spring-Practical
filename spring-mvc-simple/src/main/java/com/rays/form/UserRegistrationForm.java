@@ -1,5 +1,6 @@
 package com.rays.form;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
@@ -19,9 +20,9 @@ public class UserRegistrationForm {
 	@NotEmpty(message = "Last name is required")
 	private String lastName;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
-	private Date dob;
+	private LocalDate dob;
 
 	@NotEmpty(message = "Login id is required")
 	@Email(message = "Invalid email Id")
@@ -58,11 +59,11 @@ public class UserRegistrationForm {
 		this.lastName = lastName;
 	}
 
-	public Date getDob() {
+	public LocalDate getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 

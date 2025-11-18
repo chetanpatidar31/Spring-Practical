@@ -30,7 +30,7 @@ public class LoginCtl {
 
 		if (operation != null && operation.equals("logout")) {
 			session.invalidate();
-			model.addAttribute("successMsg", "User Logout Successfully");
+			model.addAttribute("successMsg", "Logout Successfully!!");
 			return "Login";
 		}
 
