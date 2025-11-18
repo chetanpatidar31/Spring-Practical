@@ -40,6 +40,7 @@ public class UserRegistrationCtl {
 			UserDTO dto = new UserDTO();
 			dto.setFirstName(form.getFirstName());
 			dto.setLastName(form.getLastName());
+			dto.setDob(form.getDob());
 			dto.setLogin(form.getLogin());
 			dto.setPassword(form.getPassword());
 			dto.setAddress(form.getAddress());

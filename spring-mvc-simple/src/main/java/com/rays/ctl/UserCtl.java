@@ -25,6 +25,12 @@ public class UserCtl {
 	@Autowired
 	public UserServiceInt service;
 
+	@ModelAttribute("form")
+	public void preload(Model model) {
+		List list = service.search(null, 0, 0);
+		model.addAttribute("userList", list);
+	}
+
 	@GetMapping
 	public String display(@ModelAttribute("form") UserForm form, @RequestParam(required = false) Long id) {
 
@@ -113,6 +119,7 @@ public class UserCtl {
 		if (operation != null && operation.equals("search")) {
 			dto = new UserDTO();
 			dto.setFirstName(form.getFirstName());
+			dto.setId(form.getId());
 		}
 
 		if (operation != null && operation.equals("delete")) {
