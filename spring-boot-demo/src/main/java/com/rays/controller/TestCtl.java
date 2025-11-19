@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "Test")
 public class TestCtl {
 
-	@GetMapping("/display")
+	@GetMapping
 	public String display() {
 		return "in diplay method";
 	}
 
-	@PostMapping("/submit")
+	@PostMapping
 	public String submit() {
 		return "in submit method";
 	}
