@@ -43,10 +43,9 @@ public class TestCtl {
 		ORSResponse resp = new ORSResponse();
 
 		return resp;
-
 	}
 
-	@GetMapping("dispaly3")
+	@GetMapping("display3")
 	public ORSResponse display3() {
 		ORSResponse resp = new ORSResponse();
 
@@ -63,7 +62,7 @@ public class TestCtl {
 		return resp;
 	}
 
-	@GetMapping("dispaly4")
+	@GetMapping("display4")
 	public ORSResponse display4() {
 		ORSResponse resp = new ORSResponse();
 
@@ -81,7 +80,7 @@ public class TestCtl {
 		return resp;
 	}
 
-	@GetMapping("dsiplay5")
+	@GetMapping("display5")
 	public ORSResponse display5() {
 
 		ORSResponse resp = new ORSResponse();
@@ -140,4 +139,13 @@ public class TestCtl {
 		return "in submit method";
 	}
 
+	@PostMapping("submit1")
+	public ORSResponse submit1() {
+		ORSResponse resp = new ORSResponse();
+
+		resp.setSuccess(true);
+		resp.addResult("user", "User added successfully");
+
+		return resp;
+	}
 }
