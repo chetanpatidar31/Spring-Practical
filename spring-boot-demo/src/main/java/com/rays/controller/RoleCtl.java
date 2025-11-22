@@ -40,4 +40,22 @@ public class RoleCtl extends BaseCtl {
 
 		return resp;
 	}
+
+	@PostMapping("update")
+	public ORSResponse update(@RequestBody @Valid RoleForm form, BindingResult bindingResult) {
+
+		ORSResponse resp = validate(bindingResult);
+
+		if (!resp.isSuccess()) {
+			return resp;
+		}
+
+		RoleDTO dto = (RoleDTO) form.getDto();
+
+		roleService.update(dto);
+
+		resp.addMessage("Role updated successfully....");
+
+		return resp;
+	}
 }

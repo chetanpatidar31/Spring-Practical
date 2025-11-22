@@ -19,4 +19,9 @@ public class RoleService {
 	public long add(RoleDTO dto) {
 		return roleDao.add(dto);
 	}
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void update(RoleDTO dto) {
+		roleDao.update(dto);
+	}
 }
