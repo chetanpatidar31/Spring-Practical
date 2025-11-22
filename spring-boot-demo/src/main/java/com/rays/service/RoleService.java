@@ -24,4 +24,9 @@ public class RoleService {
 	public void update(RoleDTO dto) {
 		roleDao.update(dto);
 	}
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void delete(long id) {
+	    roleDao.delete(id);
+	}
 }

@@ -15,25 +15,33 @@ public class RoleDAOImpl implements RoleDAOInt {
 
 	@Override
 	public long add(RoleDTO dto) {
-		entityManager.persist(dto);		//add
+		entityManager.persist(dto); // add
 		return dto.getId();
 	}
 
 	@Override
 	public void update(RoleDTO dto) {
-		entityManager.merge(dto);		//update
+		entityManager.merge(dto); // update
 
 	}
 
 	@Override
-	public void delete(RoleDTO dto) {
-		entityManager.remove(dto);		//delete
+	public void delete(long id) {
+		RoleDTO managed = entityManager.find(RoleDTO.class, id);
+		if (managed != null) {
+			entityManager.remove(managed);
+		}
 
+		/*
+		 * #Alternate way
+		 * RoleDTO merged = entityManager.merge(dto);
+		 * entityManager.remove(merged);
+		 */
 	}
 
 	@Override
 	public RoleDTO findByPk(long pk) {
-		return entityManager.find(RoleDTO.class, pk);	//get
+		return entityManager.find(RoleDTO.class, pk); // get
 	}
 
 }

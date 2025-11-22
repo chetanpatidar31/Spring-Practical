@@ -58,4 +58,16 @@ public class RoleCtl extends BaseCtl {
 
 		return resp;
 	}
+
+	@PostMapping("delete")
+	public ORSResponse delete(@RequestBody RoleForm form) {
+
+		ORSResponse resp = new ORSResponse();
+
+		roleService.delete(form.getId());
+
+		resp.addMessage("Role Deleted successfully.....");
+
+		return resp;
+	}
 }

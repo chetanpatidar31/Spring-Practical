@@ -8,7 +8,7 @@ public interface RoleDAOInt {
 	
 	public void update(RoleDTO dto);
 	
-	public void delete(RoleDTO dto);
+	public void delete(long id);
 	
 	public RoleDTO findByPk(long pk);
 
