@@ -1,5 +1,7 @@
 package com.rays.dao;
 
+import java.util.List;
+
 import com.rays.dto.RoleDTO;
 
 public interface RoleDAOInt {
@@ -11,5 +13,7 @@ public interface RoleDAOInt {
 	public void delete(RoleDTO dto);
 
 	public RoleDTO findByPk(long pk);
+
+	public List<RoleDTO> search(RoleDTO dto, int pageNo, int pageSize);
 
 }
