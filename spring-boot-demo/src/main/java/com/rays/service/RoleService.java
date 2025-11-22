@@ -19,14 +19,20 @@ public class RoleService {
 	public long add(RoleDTO dto) {
 		return roleDao.add(dto);
 	}
-	
+
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(RoleDTO dto) {
 		roleDao.update(dto);
 	}
-	
+
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void delete(long id) {
-	    roleDao.delete(id);
+		RoleDTO dto = findByPk(id);
+		roleDao.delete(dto);
+	}
+
+	@Transactional(readOnly = true)
+	public RoleDTO findByPk(long pk) {
+		return roleDao.findByPk(pk);
 	}
 }

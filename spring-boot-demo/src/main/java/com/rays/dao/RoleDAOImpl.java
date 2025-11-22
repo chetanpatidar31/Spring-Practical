@@ -26,17 +26,9 @@ public class RoleDAOImpl implements RoleDAOInt {
 	}
 
 	@Override
-	public void delete(long id) {
-		RoleDTO managed = entityManager.find(RoleDTO.class, id);
-		if (managed != null) {
-			entityManager.remove(managed);
-		}
+	public void delete(RoleDTO dto) {
+		entityManager.remove(dto); //delete
 
-		/*
-		 * #Alternate way
-		 * RoleDTO merged = entityManager.merge(dto);
-		 * entityManager.remove(merged);
-		 */
 	}
 
 	@Override
