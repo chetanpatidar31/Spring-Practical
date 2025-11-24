@@ -26,12 +26,13 @@ public class UserDAOImpl implements UserDAOInt {
 	@Override
 	public long add(UserDTO dto) {
 		populateDTO(dto);
-		entityManager.persist(dto); //add
+		entityManager.persist(dto); // add
 		return dto.getId();
 	}
 
 	@Override
 	public void update(UserDTO dto) {
+		populateDTO(dto);
 		entityManager.merge(dto);
 	}
 

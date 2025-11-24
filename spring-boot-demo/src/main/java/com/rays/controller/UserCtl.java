@@ -32,10 +32,19 @@ public class UserCtl extends BaseCtl {
 		}
 
 		UserDTO dto = (UserDTO) form.getDto();
-		long pk = userService.add(dto);
 
-		resp.addData(pk);
-		resp.addMessage("User added successfully..!!");
+		if (dto.getId() != null && dto.getId() > 0) {
+			userService.update(dto);
+			resp.addData(dto.getId());
+			resp.addMessage("Data updated successfully..!!");
+			resp.setSuccess(true);
+
+		} else {
+			long pk = userService.add(dto);
+			resp.addData(pk);
+			resp.addMessage("User added successfully..!!");
+			resp.setSuccess(true);
+		}
 
 		return resp;
 	}

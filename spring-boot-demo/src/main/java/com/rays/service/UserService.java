@@ -19,9 +19,10 @@ public class UserService {
 	public long add(UserDTO dto) {
 		return userDao.add(dto);
 	}
-
-	/*
-	 * public void update(UserDTO dto) { userDao.update(dto); }
-	 */
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void update(UserDTO dto) {
+		userDao.update(dto);
+	}
 
 }

@@ -26,17 +26,14 @@ public class UserForm extends BaseForm {
 	private String login;
 
 	@NotEmpty(message = "Password is required")
-	@Pattern(
-	    regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$",
-	    message = "Password must contain at least 1 uppercase, 1 lowercase, 1 number, and 1 special character"
-	)
+	@Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$", message = "Password must contain at least 1 uppercase, 1 lowercase, 1 number, and 1 special character")
 	private String password;
 
 	@NotNull(message = "DOB is Required")
 	private Date dob;
 
 	@NotNull(message = "roleId is required")
-	@Range(min = 1, max = 5, message = "roleId must be between 1 and 5")
+//	@Range(min = 1, max = 5, message = "roleId must be between 1 and 5")
 	private Long roleId;
 
 	public String getFirstName() {
