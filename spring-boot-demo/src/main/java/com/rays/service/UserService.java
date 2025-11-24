@@ -19,10 +19,21 @@ public class UserService {
 	public long add(UserDTO dto) {
 		return userDao.add(dto);
 	}
-	
+
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(UserDTO dto) {
 		userDao.update(dto);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void delete(long id) {
+		UserDTO dto = findByPk(id);
+		userDao.delete(dto);
+	}
+
+	@Transactional(readOnly = true)
+	public UserDTO findByPk(long pk) {
+		return userDao.findByPk(pk);
 	}
 
 }

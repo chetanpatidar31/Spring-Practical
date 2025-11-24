@@ -33,7 +33,7 @@ public class UserForm extends BaseForm {
 	private Date dob;
 
 	@NotNull(message = "roleId is required")
-//	@Range(min = 1, max = 5, message = "roleId must be between 1 and 5")
+	@Range(min = 1, max = 5, message = "roleId must be between 1 and 5")
 	private Long roleId;
 
 	public String getFirstName() {

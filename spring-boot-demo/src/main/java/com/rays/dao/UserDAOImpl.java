@@ -32,13 +32,13 @@ public class UserDAOImpl implements UserDAOInt {
 
 	@Override
 	public void update(UserDTO dto) {
-		populateDTO(dto);
+		populateDTO(dto); // update
 		entityManager.merge(dto);
 	}
 
 	@Override
 	public void delete(UserDTO dto) {
-		entityManager.remove(dto);
+		entityManager.remove(dto); //delete
 	}
 
 	@Override
