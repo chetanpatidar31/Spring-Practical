@@ -1,6 +1,7 @@
 package com.rays.controller;
 
 import java.io.OutputStream;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -87,6 +88,24 @@ public class UserCtl extends BaseCtl {
 			resp.addData(dto);
 			resp.setSuccess(true);
 		}
+
+		return resp;
+	}
+
+	@PostMapping("search/{pageNo}")
+	public ORSResponse search(@RequestBody UserForm form, @PathVariable int pageNo) {
+
+		ORSResponse resp = new ORSResponse();
+
+		UserDTO dto = (UserDTO) form.getDto();
+
+		int pageSize = 5;
+		List<UserDTO> list = userService.search(dto, pageNo, pageSize);
+
+		if (list != null && list.size() > 0) {
+			resp.setSuccess(true);
+		}
+		resp.addData(list);
 
 		return resp;
 	}
