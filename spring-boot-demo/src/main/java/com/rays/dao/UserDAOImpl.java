@@ -6,8 +6,10 @@ import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.rays.dto.AttachmentDTO;
 import com.rays.dto.RoleDTO;
 import com.rays.dto.UserDTO;
+import com.rays.service.AttachmentService;
 
 @Repository
 public class UserDAOImpl implements UserDAOInt {
@@ -17,6 +19,9 @@ public class UserDAOImpl implements UserDAOInt {
 
 	@Autowired
 	public RoleDAOInt roleDao;
+
+	@Autowired
+	public AttachmentService attachService;
 
 	public void populateDTO(UserDTO dto) {
 		RoleDTO roleDTO = roleDao.findByPk(dto.getRoleId());
@@ -38,7 +43,14 @@ public class UserDAOImpl implements UserDAOInt {
 
 	@Override
 	public void delete(UserDTO dto) {
-		entityManager.remove(dto); //delete
+
+		AttachmentDTO attachDto = attachService.findByPk(dto.getImageId());
+
+		if (attachDto != null) {
+			attachService.delete(attachDto.getId());
+		}
+
+		entityManager.remove(dto); // delete
 	}
 
 	@Override
