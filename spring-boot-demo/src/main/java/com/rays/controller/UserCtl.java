@@ -1,6 +1,9 @@
 package com.rays.controller;
 
+import java.io.OutputStream;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,6 +123,31 @@ public class UserCtl extends BaseCtl {
 		resp.setSuccess(true);
 
 		return resp;
+	}
+
+	@GetMapping("/profilePic/{userId}")
+	public void downloadPic(@PathVariable Long userId, HttpServletResponse response) {
+		try {
+			UserDTO userDto = userService.findByPk(userId);
+
+			AttachmentDTO attachDTO = null;
+
+			if (userDto != null) {
+				attachDTO = attachService.findByPk(userDto.getImageId());
+			}
+
+			if (attachDTO != null) {
+				response.setContentType(attachDTO.getType());
+				OutputStream out = response.getOutputStream();
+				out.write(attachDTO.getDoc());
+				out.close();
+			} else {
+				response.getWriter().write("ERROR: File not found");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }
