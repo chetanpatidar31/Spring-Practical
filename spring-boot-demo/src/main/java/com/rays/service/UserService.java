@@ -17,6 +17,18 @@ public class UserService {
 	@Autowired
 	public UserDAOInt userDao;
 
+	public UserDTO authenticate(String loginId, String password) {
+
+		UserDTO dto = userDao.findByUniqueKey("loginId", loginId);
+
+		if (dto != null) {
+			if (dto.getPassword().equals(password)) {
+				return dto;
+			}
+		}
+		return null;
+	}
+
 	@Transactional(propagation = Propagation.REQUIRED)
 	public long add(UserDTO dto) {
 		return userDao.add(dto);

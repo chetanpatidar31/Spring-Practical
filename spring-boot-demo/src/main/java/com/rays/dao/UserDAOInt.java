@@ -15,4 +15,6 @@ public interface UserDAOInt {
 	public UserDTO findByPk(long pk);
 	
 	public List<UserDTO> search(UserDTO dto, int pageNo, int pageSize);
+	
+	public UserDTO findByUniqueKey(String attribute, String value);
 }
