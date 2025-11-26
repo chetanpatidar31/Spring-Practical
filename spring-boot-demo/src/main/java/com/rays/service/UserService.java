@@ -17,9 +17,9 @@ public class UserService {
 	@Autowired
 	public UserDAOInt userDao;
 
-	public UserDTO authenticate(String loginId, String password) {
+	public UserDTO authenticate(String login, String password) {
 
-		UserDTO dto = userDao.findByUniqueKey("loginId", loginId);
+		UserDTO dto = userDao.findByUniqueKey("login", login);
 
 		if (dto != null) {
 			if (dto.getPassword().equals(password)) {
