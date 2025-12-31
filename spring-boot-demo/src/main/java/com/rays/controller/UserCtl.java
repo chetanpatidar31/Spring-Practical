@@ -3,7 +3,6 @@ package com.rays.controller;
 import java.io.OutputStream;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -21,9 +20,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.rays.common.BaseCtl;
 import com.rays.common.ORSResponse;
 import com.rays.dto.AttachmentDTO;
+import com.rays.dto.RoleDTO;
 import com.rays.dto.UserDTO;
 import com.rays.form.UserForm;
 import com.rays.service.AttachmentService;
+import com.rays.service.RoleService;
 import com.rays.service.UserService;
 
 @RestController
@@ -34,7 +35,18 @@ public class UserCtl extends BaseCtl {
 	public UserService userService;
 
 	@Autowired
+	public RoleService roleService;
+
+	@Autowired
 	public AttachmentService attachService;
+
+	@GetMapping("preload")
+	public ORSResponse preload() {
+		ORSResponse resp = new ORSResponse();
+		List<RoleDTO> roleList = roleService.search(null, 0, 0);
+		resp.addResult("roleList", roleList);
+		return resp;
+	}
 
 	@PostMapping("save")
 	public ORSResponse save(@RequestBody @Valid UserForm form, BindingResult bindingResult) {
@@ -111,8 +123,7 @@ public class UserCtl extends BaseCtl {
 	}
 
 	@PostMapping("/profilePic/{userId}")
-	public ORSResponse uploadPic(@PathVariable Long userId, @RequestParam("file") MultipartFile file,
-			HttpServletRequest req) {
+	public ORSResponse uploadPic(@PathVariable Long userId, @RequestParam("file") MultipartFile file) {
 
 		AttachmentDTO attachDto = new AttachmentDTO(file);
 

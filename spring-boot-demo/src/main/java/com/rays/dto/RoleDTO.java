@@ -32,4 +32,9 @@ public class RoleDTO extends BaseDTO {
 		this.description = description;
 	}
 
+	@Override
+	public String Value() {
+		return name;
+	}
+
 }

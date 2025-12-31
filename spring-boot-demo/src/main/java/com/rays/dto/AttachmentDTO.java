@@ -85,4 +85,11 @@ public class AttachmentDTO extends BaseDTO {
 		this.doc = doc;
 	}
 
+	@Override
+	public String Value() {
+		return name;
+	}
+	
+	
+
 }
